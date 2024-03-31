@@ -3,6 +3,7 @@ package rest_jax.messenger.resources;
 import java.util.List;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -46,5 +47,12 @@ public class MessageResources {
 	public Message updateMessage(@PathParam("messageId") long messageId, Message message) {
 		message.setId(messageId);
 ;		return messageService.updateMessage(message);
+	}
+	
+	@DELETE
+	@Path("/delete/{messageId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Message deleteMessage(@PathParam("messageId") long messageId) {
+		return messageService.removeMessage(messageId);
 	}
 }
