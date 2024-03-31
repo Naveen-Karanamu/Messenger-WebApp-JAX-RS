@@ -3,6 +3,7 @@ package rest_jax.messenger.resources;
 import java.util.List;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -42,6 +43,12 @@ public class ProfileResources {
 	public Profile updateProfile(@PathParam("profileName") String profileName, Profile profile) {
 		profile.setProfileName(profileName);
 		return profileService.updateProfile(profile);
+	}
+	
+	@DELETE
+	@Path("/delete/{profileName}")
+	public Profile deleteProfile(@PathParam("profileName") String profileName) {
+		return profileService.removeProfile(profileName);
 	}
 	
 }

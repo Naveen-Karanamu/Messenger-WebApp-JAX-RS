@@ -10,6 +10,10 @@ import rest_jax.messenger.model.Profile;
 public class ProfileService {
 	private Map<String, Profile> profiles = DatabaseClass.getProfiles();
 	
+	public ProfileService() {
+		profiles.put("naveen", new Profile(1L, "naveen", "Naveen", "Kumar", null));
+	}
+	
 	public List<Profile> getAllProfiles(){
 		return new ArrayList<Profile> (profiles.values());
 	}
