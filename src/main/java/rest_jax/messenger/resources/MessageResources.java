@@ -11,7 +11,11 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
+import rest_jax.messenger.exception.ErrorMessage;
 import rest_jax.messenger.model.Message;
 import rest_jax.messenger.service.MessageService;
 
@@ -37,14 +41,27 @@ public class MessageResources {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Message getOneMessage(@PathParam("messageId") long messageId){
+		ErrorMessage errorMessage = new ErrorMessage("Not Found", 404, "www.google.com");
+		Response response = Response.status(Status.NOT_FOUND)
+				.entity(errorMessage)
+				.build();
+		
+		if(messageId == 0) {
+			throw new WebApplicationException(response);
+		}
+		
 		return messageService.getMessage(messageId);
 	}
 	
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Message addMessage(Message message) {
-		return messageService.addMessage(message);
+	public Response addMessage(Message message) {
+//		return messageService.addMessage(message);
+		Message newMessage= messageService.addMessage(message);
+		return Response.status(Status.CREATED)
+				.entity(newMessage)
+				.build();
 	} 
 	
 	@PUT
