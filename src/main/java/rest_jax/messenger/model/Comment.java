@@ -1,24 +1,22 @@
 package rest_jax.messenger.model;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Message {
+public class Comment {
+
 	private long id;
 	private String message;
 	private Date created;
 	private String author;
-	private Map<Long, Comment> comments = new HashMap<>();
 	
-	public Message() {
-		
+	public Comment() {
+
 	}
-	public Message(long id, String message, String author) {
+	public Comment(long id, String message, Date created, String author) {
 		super();
 		this.id = id;
 		this.message = message;
-		this.created = new Date();
+		this.created = created;
 		this.author = author;
 	}
 	public long getId() {
@@ -44,11 +42,5 @@ public class Message {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-	public Map<Long, Comment> getComments() {
-		return comments;
-	}
-	public void setComments(Map<Long, Comment> comments) {
-		this.comments = comments;
 	}
 }
