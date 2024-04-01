@@ -2,6 +2,7 @@ package rest_jax.messenger.resources;
 
 import java.util.List;
 
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -22,14 +23,12 @@ public class MessageResources {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Message> getMessages(@QueryParam("year") int year,
-			@QueryParam("start") int start,
-			@QueryParam("size") int size) {
-		if(year > 0) {
-			return messageService.getAllMessagesForYear(year);
+	public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+		if(filterBean.getYear() > 0) {
+			return messageService.getAllMessagesForYear(filterBean.getYear());
 		}
-		if (start>=0 && size >= 0) {
-			return messageService.getAllMessagesPaginated(start, size);
+		if (filterBean.getStart()>=0 && filterBean.getSize() >= 0) {
+			return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
 		}
 		return messageService.getAllMessages();
 	}
