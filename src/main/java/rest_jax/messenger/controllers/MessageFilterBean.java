@@ -1,4 +1,4 @@
-package rest_jax.messenger.resources;
+package rest_jax.messenger.controllers;
 
 import jakarta.ws.rs.QueryParam;
 

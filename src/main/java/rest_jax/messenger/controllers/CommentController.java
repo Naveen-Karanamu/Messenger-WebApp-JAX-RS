@@ -1,4 +1,4 @@
-package rest_jax.messenger.resources;
+package rest_jax.messenger.controllers;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import rest_jax.messenger.service.CommentService;
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CommentResource {
+public class CommentController {
 	
 	private CommentService commentService = new CommentService();
 	

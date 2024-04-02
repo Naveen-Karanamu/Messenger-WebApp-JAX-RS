@@ -70,7 +70,7 @@
 //	
 //}
 
-package rest_jax.messenger.resources;
+package rest_jax.messenger.controllers;
 
 import java.util.List;
 
@@ -89,7 +89,7 @@ import rest_jax.messenger.model.Message;
 import rest_jax.messenger.service.MessageService;
 
 @Path("/messages")
-public class MessageResources {
+public class MessageController {
     
     private final MessageService messageService = new MessageService();
 
@@ -193,7 +193,7 @@ public class MessageResources {
     }
     
     @Path("/{messageId}/comments") // This maps to CommentResource
-    public CommentResource forwardToCommentResource(@PathParam("messageId") long messageId) {
-        return new CommentResource();
+    public CommentController forwardToCommentResource(@PathParam("messageId") long messageId) {
+        return new CommentController();
     }
 }
