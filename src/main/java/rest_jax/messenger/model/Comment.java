@@ -1,6 +1,7 @@
 package rest_jax.messenger.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Comment {
 
@@ -19,6 +20,7 @@ public class Comment {
 		this.created = created;
 		this.author = author;
 	}
+	
 	public long getId() {
 		return id;
 	}
@@ -42,5 +44,21 @@ public class Comment {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, created, id, message);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		return Objects.equals(author, other.author) && Objects.equals(created, other.created) && id == other.id
+				&& Objects.equals(message, other.message);
 	}
 }
